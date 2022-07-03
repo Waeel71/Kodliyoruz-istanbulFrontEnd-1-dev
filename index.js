@@ -108,7 +108,7 @@ const renderUsers = (users = []) => {
   const tbody = document.createElement("tbody")
   if(reverseState == true)
     {
-      tbody.innerHTML = users.map((user, index) => {
+      tbody.innerHTML = users.sort((a,b)=>a.id-b.id).map((user, index) => {
       return `<tr>
         <th scope="row">${user.id}</th>
         <th scope="row">${index+1}</th>
@@ -122,10 +122,10 @@ const renderUsers = (users = []) => {
         </td>
       </tr>`
     }).join(" ")}else{
-      tbody.innerHTML = users.reverse().map((user, index) => {
+      tbody.innerHTML = users.sort((a,b)=>b.id - a.id).map((user, index) => {
         return `<tr>
           <th scope="row">${user.id}</th>
-          <th scope="row">${index+1}</th>
+          <th scope="row">${users.length - index}</th>
           <td>${user.name}</td>
           <td>${user.email}</td>
           <td>${user.phone}</td>

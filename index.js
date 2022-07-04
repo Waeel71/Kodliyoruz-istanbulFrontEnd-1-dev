@@ -1,15 +1,21 @@
 
+const yuklemeSayfasi = document.querySelector("#loading")
+
 document.querySelector("#loadPost").addEventListener("click", () => {
+  yuklemeSayfasi.hidden = false
+  document.getElementById('ul-1').hidden = true;
+  document.getElementById('user').hidden = true;
 fetch("https://jsonplaceholder.typicode.com/posts")
   .then(response => response.json()).then(response => {
     const posts = response.slice(0, 20)
     renderPost(posts)
+    yuklemeSayfasi.hidden = true
+    document.getElementById('ul-1').hidden = false;
+  document.getElementById('user').hidden = true;
   })
 })
 
 const renderPost = (data = []) => {
-  document.getElementById('ul-1').hidden = false;
-  document.getElementById('user').hidden = true;
   data.forEach((item) => {
     const li = document.createElement("li")
     li.innerHTML = `<div class="card">
@@ -49,6 +55,9 @@ const template = `
 
 let users = []
 const loadUsers = () => {
+  yuklemeSayfasi.hidden =false
+  document.getElementById('ul-1').hidden = true;
+  document.getElementById('user').hidden = true;
   fetch("https://jsonplaceholder.typicode.com/users").then(response => {
     return response.json()
   }).then(response => {
@@ -57,6 +66,9 @@ const loadUsers = () => {
       return x
     })
     renderUsers(users)
+    yuklemeSayfasi.hidden = true
+    document.getElementById('ul-1').hidden = true;
+  document.getElementById('user').hidden = false;
   }).catch(err => {
     console.error(err)
   })
